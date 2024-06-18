@@ -51,7 +51,7 @@ int main(){
   sum += list.at(i);
   }
   //math avg and print
-  std::cout << sum / list.size();
+  std::cout << std::endl <<  sum / list.size();
   
 
 
