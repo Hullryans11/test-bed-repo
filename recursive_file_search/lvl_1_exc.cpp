@@ -5,7 +5,7 @@ int main(){
 
   // 1.1 Ask for name and ange then output
 
-  std::string = 
+  std::string 
 
   //1.2 Ask for two integers, add then print the reult
 
