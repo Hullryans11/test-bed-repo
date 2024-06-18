@@ -3,7 +3,7 @@
 
 int main(){
 
-// 1.1 Ask for name and ange then output
+/*/ 1.1 Ask for name and ange then output
 
   //init used vars
   std::string name;
@@ -35,7 +35,7 @@ int main(){
   std::cout << n1 + n2 << std::endl;
   
 // recive 4 numbers from user, input into a vector, comput the average and print it (while loop or for loop?)
-
+*/
   std::vector<int> list;
 
   //loop for receving input
