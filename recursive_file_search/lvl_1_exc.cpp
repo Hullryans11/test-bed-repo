@@ -41,14 +41,18 @@ int main(){
   //loop for receving input
   int input;
   for(int i = 0; i < 4; i++){
-    std::cout << "\nPlease enter Number " << i;
+    std::cout << "\nPlease enter Number " << i << ": ";
     std::cin >> input;
     list.push_back(input);
   }
+//SUMMATION
+  int sum;
   for(int i = 0; i < 4; i++){
-
-    std::cout << list.at(i) << std:: endl; 
-  }  
+  sum += list.at(i);
+  }
+  //math avg and print
+  std::cout << sum / list.size();
+  
 
 
 return 0;
