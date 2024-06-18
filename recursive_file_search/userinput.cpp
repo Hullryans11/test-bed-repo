@@ -2,8 +2,14 @@
 
 int main(){
   std::string input;
+
+  //Ask for input
+  std::cout << "\nPlease enter a string";
+  //recieve input
   std::cin >> input; 
 
+  //output input
+  std::cout << input << std::endl;
 
   return 0;
 }
