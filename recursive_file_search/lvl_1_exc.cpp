@@ -41,8 +41,12 @@ int main(){
   //loop for receving input
   for(int i = 0; i < 4; i++0){
     std::cout << "\nPlease enter Number " << i;
-    std::cin >> list.push_back()
+    std::cin >> list.push_back();
   }
+  for(int i = 0; i < 4; i++0){
+
+    std::cout << list.at(i) << std:: endl; 
+  }  
 
 
 return 0;
