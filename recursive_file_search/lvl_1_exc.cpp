@@ -20,8 +20,20 @@ int main(){
   //Print info
   std::cout<< "Your name is " << name << " and your age is " << age << std::endl;
   
-//1.2 Ask for two integers, add then print the reult
+//1.2 Ask for two integers, add then print the result
 
+  //Establish var
+  int n1;
+  int n2;
+  //ask uuser for input
+  std::cout << "\n for addition:\nPlease enter number 1: ";
+  std::cin >> n1;
+  std::cout << "\nPlease enter Number 2: ";
+  std::cin >> n2;
+  
+  //math and output
+  std::cout << n1 + n2 << std::endl;
+  
 // recive 4 numbers from user, input into a vector, comput the average and print it (while loop or for loop?)
 
   
