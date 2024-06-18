@@ -24,7 +24,7 @@ int main(){
   
   print_hello();
   say_hello_un("ryan");
-  std:cout << a << " + " << b << " = ' << sum << std:endl;
+  std::cout << a << " + " << b << " = " << sum(a, b) << std::endl;
 
 
   return 0;
