@@ -19,10 +19,12 @@ int sum(int a, int b){
 }
 
 int main(){
+  int a = 3;
+  int b = 4;
   
   print_hello();
   say_hello_un("ryan");
-
+  std:cout << a << " + " << b << " = ' << sum << std:endl;
 
 
   return 0;
