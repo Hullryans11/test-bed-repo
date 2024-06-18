@@ -13,7 +13,10 @@ void say_hello_un(std::string userName){
   
 }
 
-
+//funct with a parameter and return type
+int sum(int a, int b){
+  return a + b;
+}
 
 int main(){
   
