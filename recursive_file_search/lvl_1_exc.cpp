@@ -36,8 +36,27 @@ int main(){
   
 // recive 4 numbers from user, input into a vector, comput the average and print it (while loop or for loop?)
 
-  
+  std::vector<int> list;
+
+  //loop for receving input
+  for(int i = 0; i < 4; i++0){
+    std::cout << "\nPlease enter Number " << i;
+    std::cin >> list.push_back()
+  }
 
 
 return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
