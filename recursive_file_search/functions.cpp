@@ -2,18 +2,23 @@
 
 
 //Function baiscs
-//Void id the return type of the function
+//Void is the return type of the function
 void print_hello(){
-  std::cout <<"Hello";
+  std::cout << "Hello" << std::endl;
 }
 
+//Paaaments in a function, must be type delcared
+void say_hello_un(std::string userName){
+  std::cout << userName << std::endl;
+  
+}
 
 
 
 int main(){
   
   print_hello();
-  
+  say_hello_un("ryan");
 
 
 
