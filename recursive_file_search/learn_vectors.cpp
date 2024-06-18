@@ -2,7 +2,7 @@
 #include <vector>
 
 int main(){
-  int a = 10
+  int a = 10;
   //init requires data type in <> name, size not required because it dyanmic
   std::vector<int> vecT; // or you can = 0,1,2,3};
   vecT = { 0, 1, 2, 3};
