@@ -33,9 +33,8 @@ int main()
 	//modifiy array like normal by index
 	temp2[3] = 3;
 	
-	//vectors!!! in stad C== library bsically a dynamic array implimentation in the STD library
-	//# include <vector>
-	
+	//arrays have other functions like.... research for more if needed
+	 a = temp2.size();	
 	
 
 	
