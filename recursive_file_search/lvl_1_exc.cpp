@@ -39,9 +39,11 @@ int main(){
   std::vector<int> list;
 
   //loop for receving input
+  int input;
   for(int i = 0; i < 4; i++){
     std::cout << "\nPlease enter Number " << i;
-    std::cin >> list.push_back();
+    std::cin >> input;
+    list.push_back(input);
   }
   for(int i = 0; i < 4; i++){
 
