@@ -46,13 +46,13 @@ int main(){
     list.push_back(input);
   }
 //SUMMATION
-  int sum;
+  int sum = 0;
   for(int i = 0; i < 4; i++){
   sum += list.at(i);
   }
   //math avg and print
   int size = list.size();
-  std::cout << std::endl <<  sum / size;
+  std::cout << std::endl << "Your average is: " << sum / size;
   
 
 
