@@ -3,7 +3,7 @@
 
 
 //functions
-int print_array_of_str(int argc, char *argv[]){
+void print_array_of_str(int argc, char *argv[]){
 		char header[] = {"\nargument: "};
 		for(int i = 0; i < argc; i++){
 			printf("%s", header);
@@ -35,13 +35,16 @@ int main (int argc, char *argv[]){
 */
 
 
-	
-
+	char *str = "0123\0";
+	for(int i = 0; i <8; i++){
+	printf("\n\%c", str[i]);
+	}
 
 
 
 
 return 0;
 }
+
 
 
