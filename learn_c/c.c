@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <ctype.h>
 
 
 int main (int argc, char *argv[]){
-
+/*
 	int i = 23;
 	int *pI = &i;
 	printf("\nthe current afdress is %p\n", pI);
@@ -20,6 +21,21 @@ int main (int argc, char *argv[]){
 		x += 3;
 		y*= 4;
 	}
+*/
+
+
+	int print_args(int argc, char *argv[]){
+		char header[] = {"\nargument: "};
+		for(int i = 0; i < argc; i++){
+			printf("%s", header);
+			printf("%c", argv[i][2]);
+		}
+	}
+
+
+
+
+
 
 return 0;
 }
