@@ -2,6 +2,17 @@
 #include <ctype.h>
 
 
+//functions
+int print_array_of_str(int argc, char *argv[]){
+		char header[] = {"\nargument: "};
+		for(int i = 0; i < argc; i++){
+			printf("%s", header);
+			printf("%c", argv[i][2]);
+		}
+	}
+
+
+
 int main (int argc, char *argv[]){
 /*
 	int i = 23;
@@ -24,14 +35,7 @@ int main (int argc, char *argv[]){
 */
 
 
-	int print_args(int argc, char *argv[]){
-		char header[] = {"\nargument: "};
-		for(int i = 0; i < argc; i++){
-			printf("%s", header);
-			printf("%c", argv[i][2]);
-		}
-	}
-
+	
 
 
 
