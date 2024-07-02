@@ -34,7 +34,7 @@ int main (int argc, char *argv[]){
 	}
 */
 
-
+	std::cout << "\n test test test";
 	char *str = "0123\0";
 	for(int i = 0; i <8; i++){
 	printf("\n\%c", str[i]);
