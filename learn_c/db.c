@@ -36,7 +36,7 @@ void die(const char *message){
   if (errno){
     perror(message);
   }else{
-    printf("\nERROR: %s\n", message)
+    printf("\nERROR: %s\n", message);
   }
   exit(1);
 }
