@@ -74,7 +74,12 @@ struct Connection *databaseOpen(const char *filename, char mode){
 }
 
 
+int main(int argc, char *argv[]){
 
+  printf("\nAll good so far");
+  return 0;
+
+}
 
 
 
