@@ -71,6 +71,7 @@ struct Connection *databaseOpen(const char *filename, char mode){
   
   //allocate memory that will fit a conncetion structure, recive trhe pointer back and apply it to a connection var / obj
   struct Connection *conn = malloc(sizeof(struct Connection)); 
+//!!!!!!Left off here!!!!!!
 }
 
 
