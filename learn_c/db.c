@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <string.h>
 
-#define MAX_DATA
+#define MAX_DATA 512
 #define MAX_ROWS 100
 
 
@@ -13,7 +13,7 @@ struct Address{
 int id;
 int set; //
 char name[MAX_DATA];
-char email[];
+char email[MAX_DATA];
 };
 
 //Struct that defines the components of a database. capable of holding 100 records of the address object
@@ -43,7 +43,7 @@ void die(const char *message){
 
 //function to print an address record to STDOUT or consol by defualt
 void addressPrint(struct Address *addr){
-  printf("%d %s %s\n", );
+  printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
 
 //function that loads a previuoulsy used datat base in to memory for the user to edit
@@ -54,7 +54,7 @@ void loadDB(struct Connection *conn){
   //it needs a buffer (passed by pointer for locaition), it needs a size of buffer, and count of objects to be read, 
   //then it need a file object to read from
   //Ulitmatly fread takes data from a file and reads it into memory. it is bounded by the buffer size and how many time to read that sized buffer
-  int rc = fread(conn->db, sizeof(struct Database), 1, conn->file)
+  int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
   
   //error handling for a failed loading event
   if(rc!=1){
@@ -70,7 +70,7 @@ void loadDB(struct Connection *conn){
 struct Connection *databaseOpen(const char *filename, char mode){
   
   //allocate memory that will fit a conncetion structure, recive trhe pointer back and apply it to a connection var / obj
-  struct Connection *conn = malloc(sizeof(Connection)); 
+  struct Connection *conn = malloc(sizeof(struct Connection)); 
 }
 
 
