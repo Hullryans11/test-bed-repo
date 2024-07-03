@@ -35,7 +35,7 @@ struct Database db;
 void die(const char *message){
   if (errno){
     perror(message);
-  }else if{
+  }else{
     printf("\nERROR: %s\n", message)
   }
   exit(1);
@@ -54,7 +54,7 @@ void loadDB(struct Connection *conn){
   //it needs a buffer (passed by pointer for locaition), it needs a size of buffer, and count of objects to be read, 
   //then it need a file object to read from
   //Ulitmatly fread takes data from a file and reads it into memory. it is bounded by the buffer size and how many time to read that sized buffer
-  int rc = fread(conn->db, sizeof(struct Database), 1, conn->file);
+  int rc = fread(&conn->db, sizeof(struct Database), 1, conn->file);
   
   //error handling for a failed loading event
   if(rc!=1){
