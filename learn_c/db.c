@@ -63,10 +63,15 @@ void loadDB(struct Connection *conn){
 }
 
 
-//
-
-
-
+//Function that opens the database, takes a pointer to the file string to finde a file in storage. mallocs a a buffer on the heap to fit the database.
+//once the heap is configured for the database it will read the file into heap memory
+//ultimatly builds and returns a connection struc
+//this connection servesas the intetrface tho the db once its loaded into memory
+struct Connection *databaseOpen(const char *filename, char mode){
+  
+  //allocate memory that will fit a conncetion structure, recive trhe pointer back and apply it to a connection var / obj
+  struct Connection *conn = malloc(sizeof(Connection)); 
+}
 
 
 
