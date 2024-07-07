@@ -7,6 +7,23 @@
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
+
+/*notes:
+. operator is;used;to refrence struct members nirnally &&
+ the -> is;used;when refrencing THROUGH a pointer type
+when you init a var in a function yoi cannot pas a pointer;back;to the nain or;prev fun tion. this;is;beamcause when the fubc
+regurns the stack fram wis popped;off;and;the;men dealloced' you; 
+will SEGV
+likewise when you malloc in;a function youMUST pas back the pointer
+ in some;manner. if;you;dont you woll loose yoi ability;to refren e;that memory on the;heap
+
+
+*/
+
+
+
+
+
 //Defines the components of an address object, will be used a a record in the database
 struct Address {
     int id;
@@ -31,13 +48,14 @@ struct Connection {
 
 //function is called when a error is identified. prints error mesage to STDERR using a function from the errno.h header file
 //if the error is not compatible with errno.h or is not flagged by the system it is handled in the else statment manually  
-void die(const char *p_message) {
+void die(const char *p_message, struct Connection *p_conn) {
     if (errno) {
         perror(p_message);
     }
     else {
         printf("\nERROR: %s\n", p_message);
     }
+    closeDatabase(p_conn);
     exit(1);
 }
 
@@ -58,7 +76,7 @@ void loadDB(struct Connection *p_conn) {
 
     //error handling for a failed loading event
     if (rc != 1) {
-        die("File read Error when attempting to load database into memory");
+        die("File read Error when attempting to load database into memory", p_conn);
     }
 }
 
@@ -72,13 +90,13 @@ struct Connection *openDatabase(const char *p_filename, char mode) {
     //allocate heap memory that will fit a conncetion structure, recive trhe pointer back and apply it to a connection var / obj
     struct Connection *p_conn = malloc(sizeof(struct Connection));
     if (!p_conn) {
-        die("memoray allcation error for the connection struct");
+        die("memoray allcation error for the connection struct", p_conn);
     }
 
     //allocate memore on the heap for the databes inside of the connection, assign pointer locations
     p_conn->p_db = malloc(sizeof(struct Database));
     if (!p_conn->p_db) {
-        die("memoray allcation error for the database struct");
+        die("memoray allcation error for the database struct", p_conn);
     }
 
     //open file as a read or write depending on user args
@@ -96,7 +114,7 @@ struct Connection *openDatabase(const char *p_filename, char mode) {
         }
     }
     if (!p_conn->p_file) {
-        die("failed to open file");
+        die("failed to open file", p_conn);
     }
     return p_conn;
 }
@@ -122,14 +140,14 @@ void writeDatabase(struct Connection * p_conn) {
     //returns the number of "items" of size that it sucessfuly writes to teh file
     int rc = fwrite(p_conn-> p_db, sizeof(struct Database), 1, p_conn->p_file);
     if (rc != 1) {
-        die("failed to write Database");
+        die("failed to write Database", p_conn);
     }
 
     //std lib function that "flushes" a stream if open in write mode
     //essentially it writes the buffer to file adn discards buffer
     rc = fflush(p_conn->p_file);
     if (rc == -1) {
-        die("Cannot flush Database");
+        die("Cannot flush Database", p_conn);
     }
 }
 
@@ -157,7 +175,7 @@ void setDatabase(struct Connection *p_conn, int id, const char *p_name, const ch
     struct Address *p_addr = &p_conn->p_db->rows[id];
     //checks addr is already occupied
     if (p_addr->set) {
-        die("address alread set, Deleate it first");
+        die("address alread set, Deleate it first", p_conn);
     }
 
     p_addr->set = 1;
@@ -165,13 +183,13 @@ void setDatabase(struct Connection *p_conn, int id, const char *p_name, const ch
     char* res = strncpy(p_addr->name, p_name, MAX_DATA);
 
     if (!res) {
-        die("Name copy failed");
+        die("Name copy failed", p_conn);
     }
 
     res = strncpy(p_addr->email, p_email, MAX_DATA);
 
     if (!res) {
-        die("Name copy failed");
+        die("Name copy failed", p_conn);
     }
 }
 
@@ -183,7 +201,7 @@ void getDatabase(struct Connection *p_conn, int id) {
     if (p_addr->set){
         printAddr(p_addr);
     }else {
-        die("ID is not set");
+        die("ID is not set", p_conn);
     }
 
 }
@@ -216,7 +234,7 @@ void listDatabase(struct Connection * p_conn) {
 int main(int argc, char* argv[]) {
 
     if (argc < 3) {
-        die("USAGE: ex17 <dbfile> <action> [action params]");
+        die("USAGE: ex17 <dbfile> <action> [action params]", p_conn);
     }
 
     char* p_filename = argv[1];
@@ -226,7 +244,7 @@ int main(int argc, char* argv[]) {
 
     if (argc > 3) id = atoi(argv[3]);
 
-    if (id >= MAX_ROWS) die("Not enough space.");
+    if (id >= MAX_ROWS) die("Not enough space.", p_conn);
 
     switch (action) {
     case 'c':
@@ -235,17 +253,17 @@ int main(int argc, char* argv[]) {
         break;
 
     case 'g':
-        if (argc != 4) die("Need idto get");
+        if (argc != 4) die("Need idto get", p_conn);
         getDatabase(p_conn, id);
 
     case 's':
-        if (argc != 6) die("Need id, name, email to set");
+        if (argc != 6) die("Need id, name, email to set", p_conn);
         setDatabase(p_conn, id, argv[4], argv[5]);
         writeDatabase(p_conn);
         break;
 
     case 'd':
-        if (argc != 4) die("need id to delet");
+        if (argc != 4) die("need id to delet", p_conn);
 
         deleteDatabse(p_conn, id);
         writeDatabse(p_conn);
@@ -255,8 +273,12 @@ int main(int argc, char* argv[]) {
         listDatabse(p_conn);
         break;
 
+    case 'h':
+
+         printf("\n-c = init new db\ng = get record\ns = set;record\nd = delete record\n l=list;db");
+
     default:
-        die("Invalide actionc: create, g=get, s=set, d=del, l=list");
+        die("Invalide actionc: create, g=get, s=set, d=del, l=list", p_conn);
 
     }
     closeDatabase(p_conn);
