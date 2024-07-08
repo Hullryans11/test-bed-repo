@@ -45,6 +45,18 @@ struct Connection {
 
 
 //BEGIN FUNCTIONS LISTS
+void die(const char *p_message, struct Connection *p_conn);
+void die_pre_conn(const char *p_message);
+void printAddr(struct Address *p_addr);
+void loadDB(struct Connection *p_conn);
+struct Connection *openDatabase(const char *p_filename, char mode);
+void closeDatabase(struct Connection *p_conn);
+void writeDatabase(struct Connection * p_conn);
+void createDatabase(struct Connection * p_conn);
+void setDatabase(struct Connection *p_conn, int id, const char *p_name, const char * p_email);
+void getDatabase(struct Connection *p_conn, int id);
+void deleteDatabase(struct Connection * p_conn, int id);
+void listDatabase(struct Connection * p_conn);
 
 //function is called when a error is identified. prints error mesage to STDERR using a function from the errno.h header file
 //if the error is not compatible with errno.h or is not flagged by the system it is handled in the else statment manually  
@@ -58,6 +70,19 @@ void die(const char *p_message, struct Connection *p_conn) {
     closeDatabase(p_conn);
     exit(1);
 }
+
+
+//Overloaded die function for use prior to establishihg a connection struct
+void die_pre_conn(const char *p_message){
+    if (errno) {
+        perror(p_message);
+    }
+    else {
+        printf("\nERROR: %s\n", p_message);
+    }
+    exit(1);
+}
+
 
 //function to print an address record to STDOUT or consol by defualt
 void printAddr(struct Address *p_addr) {
@@ -110,7 +135,7 @@ struct Connection *openDatabase(const char *p_filename, char mode) {
 
         //if file stream is valid then laod db via connection
         if (p_conn->p_file) {
-            loadDb(p_conn);
+            loadDB(p_conn);
         }
     }
     if (!p_conn->p_file) {
@@ -234,7 +259,7 @@ void listDatabase(struct Connection * p_conn) {
 int main(int argc, char* argv[]) {
 
     if (argc < 3) {
-        die("USAGE: ex17 <dbfile> <action> [action params]", p_conn);
+        die_pre_conn("USAGE: ex17 <dbfile> <action> [action params]");
     }
 
     char* p_filename = argv[1];
@@ -249,7 +274,7 @@ int main(int argc, char* argv[]) {
     switch (action) {
     case 'c':
         createDatabase(p_conn);
-        databseWrite(p_conn);
+        writeDatabase(p_conn);
         break;
 
     case 'g':
@@ -265,12 +290,12 @@ int main(int argc, char* argv[]) {
     case 'd':
         if (argc != 4) die("need id to delet", p_conn);
 
-        deleteDatabse(p_conn, id);
-        writeDatabse(p_conn);
+        deleteDatabase(p_conn, id);
+        writeDatabase(p_conn);
         break;
 
     case 'l':
-        listDatabse(p_conn);
+        listDatabase(p_conn);
         break;
 
     case 'h':
